@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from utils import extract_feature
+from utils import extract_mfcc_feature
 
 
 def main():
@@ -40,6 +40,6 @@ def main():
                 if not os.path.isdir(os.path.dirname(target_path)):
                     os.mkdir(os.path.dirname(target_path))
                 # extract features and save it in the target path
-                features = extract_feature(src_path, mel=True)
+                features = extract_mfcc_feature(src_path)
                 target_filename = target_path.split(".")[0]
                 np.save(target_filename, features)
