@@ -5,6 +5,8 @@ import numpy as np
 from sys import byteorder
 from array import array
 from struct import pack
+import matplotlib.pyplot as plt
+import sklearn
 from utils import extract_mfcc_feature
 from svm import SVM
 
@@ -138,8 +140,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     file = args.file
 
-    data = load_data()
-    split_data = split_data(data)
+    data, y = load_data()
+    split_data = split_data(data, y)
     X_train, X_test, y_train, y_test = split_data["X_train"], split_data["X_test"], split_data["y_train"], split_data["y_test"]
     # construct the model
     model = SVM()
@@ -152,13 +154,19 @@ if __name__ == "__main__":
         # file = "test.wav"
         # record the file (start talking)
         # record_to_file(file)
-        y_predict = model.predict(X_test)
+        y_predict = [[x] for x in model.predict(X_test)]
+        print(y_test)
+        print(y_predict)
         correct = np.sum(y_predict == y_test)
         print("%d out of %d predictions correct" % (correct, len(y_predict)))
+        cm = sklearn.metrics.confusion_matrix(y_test, y_predict)
+        disp = sklearn.metrics.ConfusionMatrixDisplay(confusion_matrix=cm)
+        disp.plot()
+        plt.show()
 
     # extract features and reshape it
-    features = extract_mfcc_feature(file).reshape(1, -1)
+    # features = extract_mfcc_feature(file).reshape(1, -1)
     # predict
-    result = model.predict(features)
+    # result = model.predict(features)
 
-    print("result:", result)
+    # print("result:", result)
