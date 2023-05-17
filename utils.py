@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 label2int = {
     "male": 1,
-    "female": 0
+    "female": -1
 }
 
 
@@ -23,7 +23,7 @@ def extract_mfcc_feature(file_name):
     return result
 
 
-def load_data(vector_length=128):
+def load_data(vector_length=40):
     """A function to load gender recognition dataset from `data` folder
     After the second run, this will load from results/features.npy and results/labels.npy files
     as it is much faster!"""
@@ -36,7 +36,7 @@ def load_data(vector_length=128):
         y = np.load("results/labels.npy")
         return x, y
     # read dataframe
-    df = pd.read_csv("balanced-all.csv")
+    df = pd.read_csv("cv-valid-train.csv")
     # get total samples
     n_samples = len(df)
     # get total male samples
@@ -52,7 +52,7 @@ def load_data(vector_length=128):
     y = np.zeros((n_samples, 1))
     for i, (filename, gender) in tqdm.tqdm(enumerate(zip(df['filename'], df['gender'])), "Loading data",
                                            total=n_samples):
-        features = np.load(filename)
+        features = np.load(filename.split('.')[0]+'.npy')
         X[i] = features
         y[i] = label2int[gender]
     # save the audio features and labels into files
