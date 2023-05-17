@@ -43,3 +43,6 @@ def main():
                 features = extract_mfcc_feature(src_path)
                 target_filename = target_path.split(".")[0]
                 np.save(target_filename, features)
+
+
+main()
