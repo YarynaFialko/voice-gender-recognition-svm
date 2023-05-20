@@ -7,8 +7,9 @@ from array import array
 from struct import pack
 import matplotlib.pyplot as plt
 import sklearn
+# from sklearn import svm
 from utils import extract_mfcc_feature
-from svm import SVM
+from svm_without_kernel import SVM # , linear_kernel, polynomial_kernel, gaussian_kernel
 
 THRESHOLD = 500
 CHUNK_SIZE = 1024
@@ -127,10 +128,19 @@ def record_to_file(path):
     wf.writeframes(data)
     wf.close()
 
+def RBF(X, gamma):
+    
+    # Free parameter gamma
+    if gamma == None:
+        gamma = 1.0/X.shape[1]
+        
+    # RBF kernel Equation
+    K = np.exp(-gamma * np.sum((X - X[:,np.newaxis])**2, axis = -1))
+    
+    return K
 
 if __name__ == "__main__":
-    # load the saved model (after training)
-    # model = pickle.load(open("result/mlp_classifier.model", "rb"))
+
     from utils import load_data, split_data
     import argparse
 
@@ -139,23 +149,20 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--file", help="The path to the file, preferred to be in WAV format")
     args = parser.parse_args()
     file = args.file
+    test = False
 
-    data, y = load_data()
-    split_data = split_data(data, y)
-    X_train, X_test, y_train, y_test = split_data["X_train"], split_data["X_test"], split_data["y_train"], split_data["y_test"]
-    # construct the model
-    model = SVM()
-    # load the saved/trained weights
-    model.fit(X_train, y_train)
-    if not file or not os.path.isfile(file):
-        # if file not provided, or it doesn't exist, use your voice
-        # print("Please talk")
-        # put the file name here
-        # file = "test.wav"
-        # record the file (start talking)
-        # record_to_file(file)
-        y_predict = [[x] for x in model.predict(X_test)]
+    if test:
+        data, y = load_data()
+        split_data = split_data(data, y)
+        X_train, X_test, y_train, y_test = split_data["X_train"], split_data["X_test"], split_data["y_train"], split_data["y_test"]
+        print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+        print(np.sum(y_train))
+        # construct the model
+        model = SVM()
+        # model = svm.SVC(kernel=gaussian_kernel, gamma=0.1)
+        model.fit(X_train, y_train)
         print(y_test)
+        y_predict = [[x] for x in model.predict(X_test)]
         print(y_predict)
         correct = np.sum(y_predict == y_test)
         print("%d out of %d predictions correct" % (correct, len(y_predict)))
@@ -164,9 +171,23 @@ if __name__ == "__main__":
         disp.plot()
         plt.show()
 
-    # extract features and reshape it
-    # features = extract_mfcc_feature(file).reshape(1, -1)
-    # predict
-    # result = model.predict(features)
+    # if not file or not os.path.isfile(file):
+        # if file not provided, or it doesn't exist, use your voice
+        # print("Please talk")
+        # put the file name here
+        # file = "test.wav"
+        # record the file (start talking)
+        # record_to_file(file)
 
-    # print("result:", result)
+    if file:
+        model = SVM()
+        model.load_vars("svm_info_66k.txt")
+        # extract features and reshape it
+        features = extract_mfcc_feature(file).reshape(1, -1)
+        # predict
+        result = model.predict(features)
+        if result == 1:
+            str_result = "male"
+        else:
+            str_result = "female"
+        print("result:", str_result)
