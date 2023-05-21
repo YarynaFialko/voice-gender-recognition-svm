@@ -1,0 +1,24 @@
+.main-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*border: #2ea591 solid 2px;*/
+    margin-top: 73px;
+}
+.button  {
+    background: #ffffff;
+    border-radius: 0 50px 50px 50px;
+    border: none;
+    width: 33%;
+    padding: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    color: rgb(0,0,0,0.5);
+    box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
+.button:hover {
+    color: #00BDA8;
+
+}

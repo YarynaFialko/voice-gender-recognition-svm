@@ -1,5 +1,4 @@
 import pyaudio
-import os
 import wave
 import numpy as np
 from sys import byteorder
@@ -129,7 +128,6 @@ def record_to_file(path):
     wf.close()
 
 def RBF(X, gamma):
-    
     # Free parameter gamma
     if gamma == None:
         gamma = 1.0/X.shape[1]

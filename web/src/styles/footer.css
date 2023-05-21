@@ -1,0 +1,23 @@
+.footer {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0, 0.5);
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 40px;
+    /*padding: 20px 40px;*/
+}
+
+.left-text {
+    text-align: left;
+    width: calc(50% - 100px);
+}
+
+.right-text {
+    text-align: right;
+    width: calc(50% - 100px);
+}

@@ -1,0 +1,178 @@
+.file-load {
+  position: absolute;
+  left: 11%;
+  /*top: 45%;*/
+  height: 14%;
+  width: 30%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 5px solid rgba(173, 173, 196, 0.45);
+  border-radius: 20px;
+}
+
+/*.file-load button {*/
+/*  text-transform: uppercase;*/
+/*  font-family: "Poppins", sans-serif;*/
+/*  background-color: rgba(45, 155, 240, 0.6);*/
+/*  border-radius: 15px;*/
+/*  padding: 1.5%;*/
+/*  height: 55%;*/
+/*  width: 20%;*/
+/*  border: none;*/
+/*  color: white;*/
+/*  font-family: "Poppins", sans-serif;*/
+/*  font-style: normal;*/
+/*  font-weight: 500;*/
+/*  font-size: 17px;*/
+/*  position: absolute;*/
+/*  top: 21%;*/
+/*  right: 6%;*/
+/*}*/
+
+
+
+.file-load button:focus,
+.file-load button:active,
+.file-load button:hover {
+    background-color: rgba(45, 155, 240, 1);
+    transition: background-color 0.2s;
+}
+
+.file-load .selected-files {
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #808080;
+    position: absolute;
+    left: 6%;
+    top: 20%;
+}
+
+.files input {
+    /*outline: 2px dashed #92b0b3;*/
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 120px 0 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    /*width: 10%;*/
+}
+
+.files input:focus {
+    /*outline: 2px dashed #92b0b3;*/
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    /*border: 1px solid #92b0b3;*/
+}
+
+
+.files {
+    position: relative
+}
+
+.files:after {
+    pointer-events: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 50px;
+    right: 0;
+    height: 56px;
+    content: "";
+    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.color input {
+    background-color: #f1f1f1;
+}
+
+.files:before {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 57px;
+    /*content: " or drag it here. ";*/
+    display: block;
+    margin: 0 auto;
+    color: #2ea591;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.file-form {
+    color: #2ea591;
+}
+
+.uploader {
+    background-color: #ffffff;
+    width: 33%;
+    /*align-items: center;*/
+    margin: auto;
+    border-radius: 0 50px 50px 50px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+}
+
+
+.inputfile + label {
+    /*font-size: 1.25em;*/
+    /*font-weight: 700;*/
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    padding: 3px 10px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #00BDA8;
+}
+
+
+.inputfile + label {
+    cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.upload-icon {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 20px;
+}
