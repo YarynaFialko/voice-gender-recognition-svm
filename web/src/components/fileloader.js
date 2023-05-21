@@ -29,17 +29,20 @@ function FileLoader({onSuccess, props}) {
         e.preventDefault();
 
         const data = new FormData();
+        const fileNames = [];
 
         for(let i = 0; i < files.length; i++) {
             data.append('file', files[i]);
+            fileNames.push(files[i].name);
         }
 
         axios.post('//localhost:8000/upload', data)
             .then((response) => {
                 toast.success('Upload Success');
-                onSuccess(response.data)
+                onSuccess(fileNames[0])
             })
             .catch((e) => {
+                console.log(e)
                 toast.error('Upload Error')
             })
     };
@@ -60,7 +63,7 @@ function FileLoader({onSuccess, props}) {
                            accept=".mp3"/>
                     <label htmlFor="file">Choose a file</label>
                 </div>
-                {/*<button className={"submit-button"}>Submit</button>*/}
+                <button className={"submit-button"}>Submit</button>
             </form>
             <ToastContainer/>
         </div>
