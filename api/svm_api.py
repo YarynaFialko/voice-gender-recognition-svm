@@ -14,7 +14,7 @@ def index():
 @app.route('/predict', methods=['GET'])
 def predict():
     file = str(request.args.get('file'))
-    output = subprocess.check_output(['./main', file])
+    output = subprocess.check_output(['python3', 'main.py', '-f', file])
 
     return jsonify({'output': output.decode('utf-8').strip().split("\n")})
 

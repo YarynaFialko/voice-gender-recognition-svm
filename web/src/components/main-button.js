@@ -2,17 +2,8 @@ import React from "react";
 import "../styles/main-button.css";
 import {useNavigate} from "react-router-dom";
 
-function MainButton({content}) {
+function MainButton({content, onClick}) {
     const navigate = useNavigate();
-
-    const onClick = () => {
-        if (content === "Predict") {
-            navigate('/female');
-        } else if (content === "Return") {
-            navigate('/');
-        }
-    };
-
 
     return (
         <div className="main-button">

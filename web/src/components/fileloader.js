@@ -25,6 +25,9 @@ function FileLoader({onSuccess, props}) {
         }
     };
 
+
+
+
     const onSubmit = (e) => {
         e.preventDefault();
 

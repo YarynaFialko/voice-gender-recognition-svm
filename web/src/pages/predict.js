@@ -22,26 +22,39 @@ class Predict extends Component {
         this.setState({ file: filename });
     };
 
-    async handlePredict(event) {
+    //
+
+    handlePredict = async (event) => {
         event.preventDefault();
+
+        console.log('file: ', this.state.file);
         try {
-            const url = `${this.apiUrl}/predict?file=${this.state.file}`;
-            fetch(url)
-                .then(res => res.json())
-                .then(res => this.setState({result: res.output[0]}));
-            console.log(this.state.result);
-        } catch (e) {
-            console.log(e);
+            console.log('sending request');
+            const url = `${this.apiUrl}/predict?file=./server/public/${this.state.file}`;
+            console.log('url: ', url);
+            const response = await fetch(url);
+            const data = await response.json();
+            const result = data.output[0].split(':')[1].trim(); // Extract the result value
+            console.log(result);
+            this.setState({ result: result});
+
+
+            if (result === 'male') {
+                window.location.href = '/male';
+            } else if (result === 'female') {
+                window.location.href = '/female';
+            }
+        } catch (error) {
+            console.log(error);
         }
-    }
+    };
 
 
     render() {
         return (
             <div className='about-main'>
                 <FileLoader onSuccess={this.handleFileChange} />
-                <MainButton content={"Predict"} />
-                <button> predict</button>
+                <MainButton content={"Predict"} onClick={this.handlePredict} />
             </div>
         );
     }
