@@ -4,7 +4,7 @@ import axios from "axios";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function FileLoader({onSuccess, props}) {
+function FileLoader({onSuccess}) {
 
     const [files, setFiles] = useState([]);
 
@@ -22,21 +22,18 @@ function FileLoader({onSuccess, props}) {
         } else {
             setFiles(selectedFiles);
             toast.success('Files selected successfully.');
+            onSubmit(selectedFiles)
         }
     };
 
-
-
-
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = (selectedFiles) => {
 
         const data = new FormData();
         const fileNames = [];
 
-        for(let i = 0; i < files.length; i++) {
-            data.append('file', files[i]);
-            fileNames.push(files[i].name);
+        for (let i = 0; i < selectedFiles.length; i++) {
+            data.append("file", selectedFiles[i]);
+            fileNames.push(selectedFiles[i].name);
         }
 
         axios.post('//localhost:8000/upload', data)
@@ -53,9 +50,7 @@ function FileLoader({onSuccess, props}) {
 
     return (
         <div className="uploader">
-            <form method="post" action="#" id="#" onSubmit={onSubmit} className={'file-form'}>
                 <div className="form-group files">
-                    {/*<label>Upload Your File </label>*/}
                     <p className="label">Drag and drop</p>
                     <img className="upload-icon" src={require("../img/folder-grey.png")} alt="folder image"/>
                     <input type="file"
@@ -66,8 +61,6 @@ function FileLoader({onSuccess, props}) {
                            accept=".mp3"/>
                     <label htmlFor="file">Choose a file</label>
                 </div>
-                <button className={"submit-button"}>Submit</button>
-            </form>
             <ToastContainer/>
         </div>
 );

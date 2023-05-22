@@ -7,10 +7,14 @@ import '../styles/fileloader.css';
 // import '../styles/female.css';
 
 function Female() {
+    const onClick = () => {
+        window.location.href = "/";
+    };
+
     return (
         <div className='female-main'>
             <FileLoader />
-            <MainButton content="Return" to="/"/>
+            <MainButton content="Return" onClick={onClick}/>
         </div>
     );
 }

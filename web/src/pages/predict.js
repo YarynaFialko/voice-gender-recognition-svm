@@ -1,9 +1,8 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import FileLoader from '../components/fileloader.js'
 import MainButton from '../components/main-button.js'
 import '../styles/main-button.css';
 import '../styles/fileloader.css';
-
 
 class Predict extends Component {
     constructor(props) {
@@ -16,13 +15,13 @@ class Predict extends Component {
 
         this.apiUrl = "http://localhost:8080";
         this.handlePredict = this.handlePredict.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
 
     handleFileChange = (filename) => {
         this.setState({ file: filename });
     };
 
-    //
 
     handlePredict = async (event) => {
         event.preventDefault();
@@ -49,11 +48,10 @@ class Predict extends Component {
         }
     };
 
-
     render() {
         return (
             <div className='about-main'>
-                <FileLoader onSuccess={this.handleFileChange} />
+                <FileLoader onSuccess={this.handleFileChange}  />
                 <MainButton content={"Predict"} onClick={this.handlePredict} />
             </div>
         );
