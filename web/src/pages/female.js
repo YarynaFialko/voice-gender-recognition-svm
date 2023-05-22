@@ -1,20 +1,25 @@
-import React from 'react';
-import FileLoader from "../components/fileloader";
+import React, { useEffect } from 'react';
+import GenderReveal from "../components/gender-reveal"
 import MainButton from "../components/main-button";
 import '../styles/main-button.css';
 import '../styles/fileloader.css';
-
-// import '../styles/female.css';
+import '../styles/female.css';
 
 function Female() {
     const onClick = () => {
         window.location.href = "/";
+
     };
 
+    useEffect(() => {
+        document.body.classList.add('female-app');
+    }, []);
+
     return (
-        <div className='female-main'>
-            <FileLoader />
+        <div className='main-female'>
+            <GenderReveal gender={"female"} />
             <MainButton content="Return" onClick={onClick}/>
+            <div className={"appear"}></div>
         </div>
     );
 }
